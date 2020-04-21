@@ -9,4 +9,4 @@ get_latest_release() {
     sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
 }
 
-get_latest_release "onsdigital/eq-questionnaire-schemas" > .schemas-version
+get_latest_release "mebinabraham/eq-questionnaire-schemas" > .schemas-version
