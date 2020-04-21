@@ -1,0 +1,27 @@
+name: Schemas release PR
+
+on:
+  repository_dispatch:
+      types: schemas_release
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: 'master'
+      - name: Update schemas version
+        run: ./scripts/update_schemas_version.sh
+      - run: |
+          echo "::set-env name=SCHEMAS_VERSION::$(cat .schemas-version)"
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit-message: Update schemas to version ${{ env.SCHEMAS_VERSION }}
+          title: Update schemas to version ${{ env.SCHEMAS_VERSION }}
+          body: This is an auto-generated PR. Schema release https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}.
+          branch: schema-release-${{ env.SCHEMAS_VERSION }}
