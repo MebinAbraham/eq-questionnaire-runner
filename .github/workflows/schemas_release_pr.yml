@@ -37,8 +37,12 @@ jobs:
             
             git config user.name 'Mebin Abraham'
             git config user.email '35296336+MebinAbraham@users.noreply.github.com'
+            
+            echo "Add to file\n"
             echo "${{ secrets.TEST_GPG_KEY }}" > private.key
+            
             ls -la
+            echo "Import\n"
             gpg --import private.key
             gpg --list-keys
             
