@@ -42,7 +42,6 @@ jobs:
             echo "Add to file\n"
             echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
             
-            echo "no-tty" >> ~/.gnupg/gpg.conf
             echo use-agent >> ~/.gnupg/gpg.conf
             echo pinentry-mode loopback >> ~/.gnupg/gpg.conf
             echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
