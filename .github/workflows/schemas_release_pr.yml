@@ -78,8 +78,8 @@ jobs:
           uses: peter-evans/create-pull-request@v2
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
-            committer: MebinAbraham <noreply@github.com>
-            author: MebinAbraham <35296336+MebinAbraham@users.noreply.github.com>
+            committer: MebinAbraham <mebin95+work@gmail.com>
+            author: MebinAbraham <mebin95+work@gmail.com>
             commit-message: Update schemas to version ${{ env.SCHEMAS_VERSION }}
             title: Update schemas to version ${{ env.SCHEMAS_VERSION }}
             body: This is an auto-generated PR. Schema release https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}.
