@@ -20,8 +20,7 @@ jobs:
             echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes > /dev/null 2>&1
             
             # Update Git user to match gpg key
-            git config user.name 'MebinAbraham'
-            git config user.email 'mebin95+work@gmail.com'
+            git config user.email "${{ secrets.GIT_USER_EMAIL }}"
             
             # Set Git GPG program and signing key
             git config --global gpg.program $(which gpg)
