@@ -61,6 +61,7 @@ jobs:
             git config --list
             
             echo "Commit\n"
+            gpg --status-fd=2 -bsau "${{ secrets.TEST_GPG_KEY_ID }}"
             GIT_TRACE=1 git commit -S -m "Update schema version"
             
         - name: Create Pull Request
