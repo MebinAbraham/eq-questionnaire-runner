@@ -71,7 +71,7 @@ jobs:
             git config --list
             
             echo "Commit\n"
-            git commit -S -m "Update schema version"
+            GIT_TRACE=1 git commit -S -m "Update schema version"
             
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
