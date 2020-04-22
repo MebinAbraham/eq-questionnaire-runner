@@ -72,7 +72,7 @@ jobs:
             
             echo "Commit\n"
             GIT_TRACE=1 git commit -S -m "Update schema version to $TAG"
-            exit 1
+            
             
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
@@ -84,3 +84,7 @@ jobs:
             title: Update schemas to version ${{ env.SCHEMAS_VERSION }}
             body: This is an auto-generated PR. Schema release https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}.
             branch: schema-release-${{ env.SCHEMAS_VERSION }}
+        - name: Temp
+          uses: actions/checkout@v2
+        - run: |
+            exit 1
