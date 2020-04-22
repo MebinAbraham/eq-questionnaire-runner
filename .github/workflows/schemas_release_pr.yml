@@ -49,8 +49,6 @@ jobs:
             echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
             echo RELOADAGENT | gpg-connect-agent
             
-            gpg --passphrase-file .gpg_passphrase
-            
             ls -la
             echo "Import\n"
             gpg --list-keys
@@ -74,7 +72,7 @@ jobs:
             
             echo "Commit\n"
             gpg --status-fd=2 -bsau FBD5CD0950FCE427
-            GIT_TRACE=1 git commit -S -m "Update schema version"
+            GIT_TRACE=1 git commit -S -m "Update schema version" --passphrase-file .gpg_passphrase
             
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
