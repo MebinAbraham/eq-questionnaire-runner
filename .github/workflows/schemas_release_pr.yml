@@ -47,6 +47,7 @@ jobs:
             git add -A
             gpg --list-secret-keys --keyid-format LONG
             git config --global commit.gpgsign true
+            git config --global gpg.program gpg
             
             git config --list
             git commit -S -m "Update schema version"
