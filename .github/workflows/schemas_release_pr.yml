@@ -34,7 +34,7 @@ jobs:
             ref: 'master'
         - run: |
             echo ${{ toJson(github) }}
-            echo "::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.ref }}"
+            echo "::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.tag }}"
             echo $SCHEMA_VERSION
             
             git config user.name 'Mebin Abraham'
