@@ -28,37 +28,39 @@ jobs:
   create-pull-request-2:
       runs-on: ubuntu-18.04
       steps:
-        - name: Update schema version
+        - name: Update schemas version
           uses: actions/checkout@v2
           with:
             ref: 'master'
         - run: |
             TAG=${{ github.event.client_payload.tag }}
             echo "::set-env name=SCHEMAS_VERSION::$TAG"
-      
-            git config user.name 'Mebin Abraham'
-            git config user.email 'mebin95+work@gmail.com'
-          
+            
+            # Import GPG key to sign the commit
             echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
             
+            # Update git user to match gpg key
+            git config user.name 'Mebin Abraham'
+            git config user.email 'mebin95+work@gmail.com'
+            git config --global gpg.program $(which gpg)
+          
             git config --global user.signingkey B4814B500C07AF24
         
             echo $TAG > .schemas-version
             git add -A
-            git config --global gpg.program $(which gpg)
-            git commit -S -m "Update schema version to $TAG"            
+            git commit -S -m "Update schema version to $TAG"
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
             committer: MebinAbraham <mebin95+work@gmail.com>
             author: MebinAbraham <mebin95+work@gmail.com>
-            commit-message: Update schemas to version ${{ env.SCHEMAS_VERSION }}
-            title: Update schemas to version ${{ env.SCHEMAS_VERSION }}
+            commit-message: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
+            title: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             body: |
               This is an auto-generated PR.
               Schema release: https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}
-            branch: schema-release-${{ env.SCHEMAS_VERSION }}
+            branch: "schemas-release-${{ env.SCHEMAS_VERSION }}"
         - name: Temp
           uses: actions/checkout@v2
         - run: |
