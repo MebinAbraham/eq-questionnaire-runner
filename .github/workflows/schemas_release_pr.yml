@@ -32,10 +32,10 @@ jobs:
           with:
             ref: 'master'
         - name: Update schemas version
-          run: ./scripts/update_schemas_version.sh
         - run: |
-            echo ${{ github.event.client_payload }}
-            echo "::set-env name=SCHEMAS_VERSION::$(cat .schemas-version)"
+            GITHUB_REF=`echo ${{ github.event.client_payload.ref }}`
+            echo ::set-output name=SCHEMAS_VERSION::${GITHUB_REF/refs\/tags\//}
+            echo $SCHEMA_VERSION
             
             git config user.name 'Mebin Abraham'
             git config user.email 'mebin95+work@gmail.com'
