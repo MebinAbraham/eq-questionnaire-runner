@@ -19,13 +19,13 @@ jobs:
             # Import GPG key to sign the commit
             echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes &>/dev/null
             
-            # Update Git user to match gpg key
-            git config user.name "${{ secrets.GIT_USER_NAME }}"
-            git config user.email "${{ secrets.GIT_USER_EMAIL }}"
-            
             # Set Git GPG program and signing key
             git config --global gpg.program $(which gpg)
             git config --global user.signingkey "${{ secrets.GPG_KEY_ID }}"
+            
+            # Update Git user to match gpg key
+            git config user.name "${{ secrets.GIT_USER_NAME }}"
+            git config user.email "${{ secrets.GIT_USER_EMAIL }}"
             
             # Update & commit schema version file
             echo $TAG > .schemas-version
