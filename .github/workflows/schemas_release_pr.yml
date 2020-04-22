@@ -41,6 +41,9 @@ jobs:
             gpg --import private.key
             gpg --list-keys
             
+            expect -c "spawn gpg --edit-key ${{ secrets.TEST_GPG_KEY_ID }} trust quit; send \"5\ry\r\"; expect eof"
+            git config --global user.signingkey "${{ secrets.TEST_GPG_KEY_ID }}"
+            
             echo "v0.1.4" > .schemas-version
             git add -A
             gpg --list-secret-keys --keyid-format LONG
