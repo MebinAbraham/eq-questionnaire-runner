@@ -34,7 +34,7 @@ jobs:
             ref: 'master'
         - run: |
             TAG=${{ github.event.client_payload.tag }}
-            echo "::set-output name=SCHEMA_VERSION::$TAG"
+            echo "::set-output name=SCHEMAS_VERSION::$TAG"
             echo $TAG
             
             git config user.name 'Mebin Abraham'
