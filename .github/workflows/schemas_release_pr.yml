@@ -36,7 +36,7 @@ jobs:
         - run: |
             git config user.name 'Mebin Abraham'
             git config user.email '35296336+MebinAbraham@users.noreply.github.com'
-            echo "v0.1.4 >> .schemas-version
+            echo "v0.1.4" >> .schemas-version
             git commit -S "Update schema version"
             
         - name: Create Pull Request
