@@ -33,8 +33,9 @@ jobs:
           with:
             ref: 'master'
         - run: |
-            echo "::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.tag }}"
-            echo $SCHEMA_VERSION
+            TAG=${{ github.event.client_payload.tag }}
+            echo "::set-output name=SCHEMA_VERSION::$TAG"
+            echo $TAG
             
             git config user.name 'Mebin Abraham'
             git config user.email 'mebin95+work@gmail.com'
@@ -54,7 +55,7 @@ jobs:
             
             git config --global user.signingkey B4814B500C07AF24
             
-            echo "v0.1.4" > .schemas-version
+            echo $TAG > .schemas-version
             git add -A
             
             echo "List"
@@ -70,7 +71,7 @@ jobs:
             git config --list
             
             echo "Commit\n"
-            GIT_TRACE=1 git commit -S -m "Update schema version"
+            GIT_TRACE=1 git commit -S -m "Update schema version to $TAG"
             exit 1
             
         - name: Create Pull Request
