@@ -20,6 +20,7 @@ jobs:
             echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes > /dev/null 2>&1
             
             # Update Git user to match gpg key
+            git config user.name "${{ secrets.GIT_USER_NAME }}"
             git config user.email "${{ secrets.GIT_USER_EMAIL }}"
             
             # Set Git GPG program and signing key
@@ -34,8 +35,8 @@ jobs:
           uses: peter-evans/create-pull-request@v2
           with:
             token: "${{ secrets.GITHUB_TOKEN }}"
-            committer: "MebinAbraham <mebin95+work@gmail.com>"
-            author: "MebinAbraham <mebin95+work@gmail.com>"
+            committer: "${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_EMAIL }}>"
+            author: "${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_MAIL }}>"
             commit-message: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             title: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             body: |
