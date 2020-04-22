@@ -46,6 +46,7 @@ jobs:
             echo "v0.1.4" > .schemas-version
             git add -A
             gpg --list-secret-keys --keyid-format LONG
+            export GPG_TTY=$(tty)
             git config --global commit.gpgsign true
             git config --global gpg.program gpg
             
