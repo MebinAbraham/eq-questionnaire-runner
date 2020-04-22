@@ -36,6 +36,9 @@ jobs:
         - run: |
             git config user.name 'Mebin Abraham'
             git config user.email '35296336+MebinAbraham@users.noreply.github.com'
+            echo ${{ secrets.TEST_GPG_KEY }} >> private.key
+            gpg --import private.key
+            
             echo "v0.1.4" >> .schemas-version
             git add -A
             gpg --list-secret-keys --keyid-format LONG
