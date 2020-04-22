@@ -34,34 +34,6 @@ jobs:
         - name: Update schemas version
           run: ./scripts/update_schemas_version.sh
         - run: |
-            git config user.name 'Mebin Abraham'
-            git config user.email '35296336+MebinAbraham@users.noreply.github.com'
-            echo "${{ secrets.TEST_GPG_KEY }}" > private.key
-            ls -la
-            gpg --import private.key
-            gpg --list-keys
-            
-            git config --global user.signingkey A199D26FED874967
-            
-            echo "v0.1.4" > .schemas-version
-            git add -A
-            
-            echo "List"
-            gpg --list-secret-keys --keyid-format LONG
-            
-            echo "GPG TTY\n"
-            export GPG_TTY=$(tty)
-            echo $GPG_TTY
-            
-            echo "Sign config\n"
-            git config --global commit.gpgsign true
-            git config --global gpg.program gpg
-            
-            echo "Config List\n"
-            git config --list
-            
-            echo "Commit\n"
-            gpg --status-fd=2 -bsau A199D26FED874967
             GIT_TRACE=1 git commit -S -m "Update schema version"
             
         - name: Create Pull Request
