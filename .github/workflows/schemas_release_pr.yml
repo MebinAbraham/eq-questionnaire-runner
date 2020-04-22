@@ -33,8 +33,8 @@ jobs:
           with:
             ref: 'master'
         - run: |
-            echo ${{ github }}
-            echo "::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.tag }}"
+            echo ${{ github.event }}
+            echo "::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.ref }}"
             echo $SCHEMA_VERSION
             
             git config user.name 'Mebin Abraham'
