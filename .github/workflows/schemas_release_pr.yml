@@ -38,7 +38,7 @@ jobs:
             git config user.email '35296336+MebinAbraham@users.noreply.github.com'
             echo "v0.1.4" >> .schemas-version
             git add -A
-            git commit -S "Update schema version"
+            git commit -S -m "Update schema version"
             
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
