@@ -34,42 +34,19 @@ jobs:
             ref: 'master'
         - run: |
             TAG=${{ github.event.client_payload.tag }}
-            echo "::set-output name=SCHEMAS_VERSION::$TAG"
-            echo $TAG
-            
+            echo "::set-env name=SCHEMAS_VERSION::$TAG"
+      
             git config user.name 'Mebin Abraham'
             git config user.email 'mebin95+work@gmail.com'
           
-            echo "Add to file\n"
             echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
             
-            
-            
-            ls -la
-            echo "Import\n"
-            gpg --list-keys
-            
             git config --global user.signingkey B4814B500C07AF24
-            
+        
             echo $TAG > .schemas-version
             git add -A
-            
-            echo "List"
-            gpg --list-secret-keys --keyid-format LONG
-      
-            
-            echo "Sign config\n"
-            git config --global commit.gpgsign true
             git config --global gpg.program $(which gpg)
-            
-            
-            echo "Config List\n"
-            git config --list
-            
-            echo "Commit\n"
-            GIT_TRACE=1 git commit -S -m "Update schema version to $TAG"
-            
-            
+            git commit -S -m "Update schema version to $TAG"            
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
           with:
@@ -78,7 +55,9 @@ jobs:
             author: MebinAbraham <mebin95+work@gmail.com>
             commit-message: Update schemas to version ${{ env.SCHEMAS_VERSION }}
             title: Update schemas to version ${{ env.SCHEMAS_VERSION }}
-            body: This is an auto-generated PR.\nSchema release https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}.
+            body: |
+              This is an auto-generated PR.
+              Schema release: https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}
             branch: schema-release-${{ env.SCHEMAS_VERSION }}
         - name: Temp
           uses: actions/checkout@v2
