@@ -28,10 +28,10 @@ jobs:
   create-pull-request-2:
       runs-on: ubuntu-18.04
       steps:
-        - uses: actions/checkout@v2
+        - name: Update schema version
+          uses: actions/checkout@v2
           with:
             ref: 'master'
-        - name: Update schemas version
         - run: |
             echo ::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.tag }
             echo $SCHEMA_VERSION
