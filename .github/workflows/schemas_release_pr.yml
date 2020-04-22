@@ -33,18 +33,18 @@ jobs:
           with:
             ref: 'master'
         - run: |
-            TAG=${{ github.event.client_payload.tag }}
+            TAG="${{ github.event.client_payload.tag }}"
             echo "::set-env name=SCHEMAS_VERSION::$TAG"
             
             # Import GPG key to sign the commit
-            echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
+            echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
             
             # Update git user to match gpg key
-            git config user.name 'Mebin Abraham'
+            git config user.name 'MebinAbraham'
             git config user.email 'mebin95+work@gmail.com'
             git config --global gpg.program $(which gpg)
           
-            git config --global user.signingkey B4814B500C07AF24
+            git config --global user.signingkey "${{ secrets.GPG_KEY_UD }}"
         
             echo $TAG > .schemas-version
             git add -A
@@ -52,9 +52,9 @@ jobs:
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
           with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            committer: MebinAbraham <mebin95+work@gmail.com>
-            author: MebinAbraham <mebin95+work@gmail.com>
+            token: "${{ secrets.GITHUB_TOKEN }}"
+            committer: "MebinAbraham <mebin95+work@gmail.com>"
+            author: "MebinAbraham <mebin95+work@gmail.com>"
             commit-message: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             title: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             body: |
