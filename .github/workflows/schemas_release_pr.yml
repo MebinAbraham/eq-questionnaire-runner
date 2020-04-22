@@ -41,7 +41,6 @@ jobs:
             gpg --import private.key
             gpg --list-keys
             
-            git config --global user.signingkey "${{ secrets.TEST_GPG_KEY_ID }}"
             git config --global user.signingkey A199D26FED874967
             
             echo "v0.1.4" > .schemas-version
