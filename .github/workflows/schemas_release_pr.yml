@@ -45,13 +45,23 @@ jobs:
             
             echo "v0.1.4" > .schemas-version
             git add -A
+            
+            echo "List"
             gpg --list-secret-keys --keyid-format LONG
+            
+            echo "GPG TTY\n"
             export GPG_TTY=$(tty)
+            echo $GPG_TTY
+            
+            echo "Sign config\n"
             git config --global commit.gpgsign true
             git config --global gpg.program gpg
             
+            echo "Config List\n"
             git config --list
-            git commit -S -m "Update schema version"
+            
+            echo "Commit\n"
+            GIT_TRACE=1 git commit -S -m "Update schema version"
             
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
