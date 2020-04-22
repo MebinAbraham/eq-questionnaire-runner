@@ -35,8 +35,8 @@ jobs:
           uses: peter-evans/create-pull-request@v2
           with:
             token: "${{ secrets.GITHUB_TOKEN }}"
-            committer: "${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_EMAIL }}>"
-            author: "${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_MAIL }}>"
+            committer: ${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_EMAIL }}>
+            author: ${{ secrets.GIT_USER_NAME }} <${{ secrets.GIT_USER_MAIL }}>
             commit-message: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             title: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             body: |
