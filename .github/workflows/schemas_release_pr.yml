@@ -34,6 +34,7 @@ jobs:
         - name: Update schemas version
           run: ./scripts/update_schemas_version.sh
         - run: |
+            echo ${{ github.event.client_payload }}
             echo "::set-env name=SCHEMAS_VERSION::$(cat .schemas-version)"
             
             git config user.name 'Mebin Abraham'
