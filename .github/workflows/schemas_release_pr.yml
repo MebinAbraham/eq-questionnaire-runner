@@ -17,7 +17,7 @@ jobs:
             echo "::set-env name=SCHEMAS_VERSION::$TAG"
             
             # Import GPG key to sign the commit
-            echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes > /dev/null 2>&1
+            echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes &>/dev/null
             
             # Update Git user to match gpg key
             git config user.name "${{ secrets.GIT_USER_NAME }}"
