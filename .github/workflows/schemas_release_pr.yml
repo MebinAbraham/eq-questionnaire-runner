@@ -39,6 +39,7 @@ jobs:
             echo "${{ secrets.TEST_GPG_KEY }}" > private.key
             ls -la
             gpg --import private.key
+            gpg --list-keys
             
             echo "v0.1.4" > .schemas-version
             git add -A
