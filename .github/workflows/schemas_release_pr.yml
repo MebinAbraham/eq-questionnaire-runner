@@ -39,11 +39,10 @@ jobs:
             git config user.email '35296336+MebinAbraham@users.noreply.github.com'
             
             echo "Add to file\n"
-            echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode > private.key
+            echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
             
             ls -la
             echo "Import\n"
-            gpg --import private.key
             gpg --list-keys
             
             git config --global user.signingkey FBD5CD0950FCE427
