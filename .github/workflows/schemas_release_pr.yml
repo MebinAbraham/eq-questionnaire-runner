@@ -33,8 +33,7 @@ jobs:
             ref: 'master'
         - name: Update schemas version
         - run: |
-            GITHUB_REF=`echo ${{ github.event.client_payload.ref }}`
-            echo ::set-output name=SCHEMAS_VERSION::${GITHUB_REF/refs\/tags\//}
+            echo ::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.tag }
             echo $SCHEMA_VERSION
             
             git config user.name 'Mebin Abraham'
