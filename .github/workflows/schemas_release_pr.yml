@@ -38,6 +38,7 @@ jobs:
             git config user.email '35296336+MebinAbraham@users.noreply.github.com'
             echo "v0.1.4" >> .schemas-version
             git add -A
+            gpg --list-secret-keys --keyid-format LONG
             git commit -S -m "Update schema version"
             
         - name: Create Pull Request
