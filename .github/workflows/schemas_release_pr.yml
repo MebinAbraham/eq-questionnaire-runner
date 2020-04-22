@@ -44,7 +44,7 @@ jobs:
             git config user.email 'mebin95+work@gmail.com'
             git config --global gpg.program $(which gpg)
           
-            git config --global user.signingkey "${{ secrets.GPG_KEY_UD }}"
+            git config --global user.signingkey "${{ secrets.GPG_KEY_ID }}"
         
             echo $TAG > .schemas-version
             git add -A
