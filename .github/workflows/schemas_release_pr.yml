@@ -59,7 +59,8 @@ jobs:
             
             echo "Sign config\n"
             git config --global commit.gpgsign true
-            git config --global gpg.program gpg
+            git config --global gpg.program $(which gpg)
+            echo "no-tty" >> ~/.gnupg/gpg.conf
             
             echo "Config List\n"
             git config --list
