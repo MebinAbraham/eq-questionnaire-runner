@@ -33,7 +33,6 @@ jobs:
           with:
             ref: 'master'
         - run: |
-            echo ${{ toJson(github) }}
             echo "::set-output name=SCHEMA_VERSION::${{ github.event.client_payload.tag }}"
             echo $SCHEMA_VERSION
             
