@@ -34,6 +34,7 @@ jobs:
         - name: Update schemas version
           run: ./scripts/update_schemas_version.sh
         - run: |
+            echo "::set-env name=SCHEMAS_VERSION::$(cat .schemas-version)"
             
             git config user.name 'Mebin Abraham'
             git config user.email 'mebin95+work@gmail.com'
