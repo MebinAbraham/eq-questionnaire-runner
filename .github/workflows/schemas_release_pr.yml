@@ -37,14 +37,16 @@ jobs:
             
             git config user.name 'Mebin Abraham'
             git config user.email '35296336+MebinAbraham@users.noreply.github.com'
+            
+            
+            echo "Add to file\n"
+            echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
+            
             echo "no-tty" >> ~/.gnupg/gpg.conf
             echo use-agent >> ~/.gnupg/gpg.conf
             echo pinentry-mode loopback >> ~/.gnupg/gpg.conf
             echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
             echo RELOADAGENT | gpg-connect-agent
-            
-            echo "Add to file\n"
-            echo "${{ secrets.TEST_GPG_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes
             
             ls -la
             echo "Import\n"
