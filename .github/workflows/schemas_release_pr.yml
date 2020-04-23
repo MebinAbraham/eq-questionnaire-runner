@@ -30,7 +30,7 @@ jobs:
             # Update & commit schema version file
             echo $TAG > .schemas-version
             git add -A
-            git commit -S -m "Update schema version to $TAG"
+            git commit -S -m "Update schemas version to $TAG"
         - name: Create Pull Request
           uses: peter-evans/create-pull-request@v2
           with:
