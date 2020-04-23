@@ -17,15 +17,15 @@ jobs:
             echo "::set-env name=SCHEMAS_VERSION::$TAG"
             
             # Import GPG key to sign the commit
-            echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --import --no-tty --batch --yes &>/dev/null
+            echo "${{ secrets.GPG_PRIVATE_KEY_NO }}" | base64 --decode | gpg --import --no-tty --batch --yes &>/dev/null
             
             # Set Git GPG program and signing key
             git config --global gpg.program $(which gpg)
-            git config --global user.signingkey "${{ secrets.GPG_KEY_ID }}"
+            git config --global user.signingkey "${{ secrets.GPG_KEY_ID_NO }}"
             
             # Update Git user details to match gpg key
             git config user.name "${{ secrets.GIT_USER_NAME }}"
-            git config user.email "${{ secrets.GIT_USER_EMAIL }}"
+            git config user.email "${{ secrets.GIT_USER_EMAIL_NO }}"
             
             # Update and commit schemas version file
             echo $TAG > .schemas-version
