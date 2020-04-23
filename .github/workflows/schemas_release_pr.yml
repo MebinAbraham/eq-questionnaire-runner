@@ -23,7 +23,7 @@ jobs:
             git config --global gpg.program $(which gpg)
             git config --global user.signingkey "${{ secrets.GPG_KEY_ID }}"
             
-            # Update Git user to match gpg key
+            # Update Git user details to match gpg key
             git config user.name "${{ secrets.GIT_USER_NAME }}"
             git config user.email "${{ secrets.GIT_USER_EMAIL }}"
             
