@@ -40,4 +40,4 @@ jobs:
           body: |
             This is an auto-generated PR.
             Schemas release: https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}
-          branch: "schemas-release"
+          branch: "schemas-release-${{ env.SCHEMAS_VERSION }}"
