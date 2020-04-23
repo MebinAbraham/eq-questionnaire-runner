@@ -8,7 +8,7 @@ jobs:
   create-pull-request:
       runs-on: ubuntu-18.04
       steps:
-        - name: Update schemas version
+        - name: Update and commit schemas version
           uses: actions/checkout@v2
           with:
             ref: 'master'
@@ -27,7 +27,7 @@ jobs:
             git config user.name "${{ secrets.GIT_USER_NAME }}"
             git config user.email "${{ secrets.GIT_USER_EMAIL }}"
             
-            # Update & commit schema version file
+            # Update and commit schemas version file
             echo $TAG > .schemas-version
             git add -A
             git commit -S -m "Update schemas version to $TAG"
@@ -39,7 +39,7 @@ jobs:
             title: "Update schemas to version ${{ env.SCHEMAS_VERSION }}"
             body: |
               This is an auto-generated PR.
-              Schema release: https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}
+              Schemas release: https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}
             branch: "schemas-release-${{ env.SCHEMAS_VERSION }}"
         - name: Temp
           uses: actions/checkout@v2
