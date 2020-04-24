@@ -20,7 +20,7 @@ on:
       - submitted
   # Success statuses can unblock the corresponding
   # pull requests and make them mergeable.
-  status: {}
+  status: {"success"}
 
 jobs:
   autosquash:
