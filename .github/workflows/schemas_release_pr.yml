@@ -37,5 +37,7 @@ jobs:
           branch: "schemas-release-${{ env.SCHEMAS_VERSION }}"
       - name: Update and commit schemas version
         uses: actions/checkout@v2
-        run: |
+        with:
+          ref: 'master'
+      - run: |
           exit 1
