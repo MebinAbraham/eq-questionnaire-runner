@@ -35,3 +35,7 @@ jobs:
             This is an auto-generated PR.
             Schemas release: https://github.com/ONSdigital/eq-questionnaire-schemas/releases/tag/${{ env.SCHEMAS_VERSION }}
           branch: "schemas-release-${{ env.SCHEMAS_VERSION }}"
+      - name: Update and commit schemas version
+        uses: actions/checkout@v2
+        run: |
+          exit 1
