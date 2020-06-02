@@ -1,11 +1,11 @@
-import JwtHelper from "../../../jwt_helper";
+import { getRandomString } from "../../../jwt_helper";
 import AddressConfirmationPage from "../../../generated_pages/last_viewed_question_guidance/address-confirmation.page.js";
 import HouseholdInterstitialPage from "../../../generated_pages/last_viewed_question_guidance/household-interstitial.page.js";
 import PrimaryPersonListCollectorPage from "../../../generated_pages/last_viewed_question_guidance/primary-person-list-collector.page.js";
 
 describe("Last viewed question guidance", () => {
   const resumableLaunchParams = {
-    responseId: JwtHelper.getRandomString(16),
+    responseId: getRandomString(16),
     userId: "test_user",
   };
 
